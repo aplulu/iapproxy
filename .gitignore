@@ -3,4 +3,6 @@
 .vscode
 
 *.tfvars
+.terraform
 tmp
+.envrc
