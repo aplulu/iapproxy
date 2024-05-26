@@ -13,6 +13,7 @@ type config struct {
 	GoogleImpersonateServiceAccount string   `envconfig:"google_impersonate_service_account" default:""`
 	URLPatterns                     []string `envconfig:"url_patterns" default:""`
 	IAPClientID                     string   `envconfig:"iap_client_id" default:""`
+	ProxyVerbose                    bool     `envconfig:"proxy_verbose" default:"false"`
 }
 
 var conf config
@@ -53,4 +54,8 @@ func URLPatterns() []regexp.Regexp {
 
 func IAPClientID() string {
 	return conf.IAPClientID
+}
+
+func ProxyVerbose() bool {
+	return conf.ProxyVerbose
 }

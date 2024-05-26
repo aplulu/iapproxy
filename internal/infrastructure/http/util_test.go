@@ -1,7 +1,6 @@
 package http
 
 import (
-	"net/url"
 	"regexp"
 	"testing"
 
@@ -27,15 +26,16 @@ func TestIsURLPatternMatch(t *testing.T) {
 			patterns: []string{"https://.*"},
 			expected: false,
 		},
+		{
+			name:     "URL matches multiple patterns",
+			input:    "https://cms-new.devspwn.net:443/",
+			patterns: []string{"^https://.*\\.devspwn\\.net(:\\d+)?/?.*$"},
+			expected: true,
+		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			u, err := url.Parse(tc.input)
-			if err != nil {
-				t.Fatalf("Failed to parse URL: %v", err)
-			}
-
 			var patterns []regexp.Regexp
 			for _, pattern := range tc.patterns {
 				re, err := regexp.Compile(pattern)
@@ -45,7 +45,7 @@ func TestIsURLPatternMatch(t *testing.T) {
 				patterns = append(patterns, *re)
 			}
 
-			result := isURLPatternMatch(u, patterns)
+			result := isURLPatternMatch(tc.input, patterns)
 			assert.Equal(t, tc.expected, result)
 		})
 	}

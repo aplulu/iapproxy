@@ -1,13 +1,12 @@
 package http
 
 import (
-	"net/url"
 	"regexp"
 )
 
-func isURLPatternMatch(u *url.URL, patterns []regexp.Regexp) bool {
+func isURLPatternMatch(url string, patterns []regexp.Regexp) bool {
 	for _, pattern := range patterns {
-		if pattern.MatchString(u.String()) {
+		if pattern.MatchString(url) {
 			return true
 		}
 	}
