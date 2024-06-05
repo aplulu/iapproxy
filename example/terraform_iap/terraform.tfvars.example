@@ -1,0 +1,4 @@
+google_project_id = "your_project_id"
+iap_support_email = "hello@example.jp"
+iap_members = ["user:hello@example.jp", "domain:example.jp"]
+hello_hostname = "hello.example.jp"
